@@ -45,30 +45,102 @@
         object-fit: contain; /* supaya gambar full terlihat, tidak terpotong */
     }
     .service-img {
-    width: 100%;
-    max-height: 200px; /* batas tinggi gambar */
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #fff; /* biar ada background kalau rasio beda */
-}
+        width: 100%;
+        max-height: 200px; /* batas tinggi gambar */
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #fff; /* biar ada background kalau rasio beda */
+        position: relative;
+    }
 
-.service-img img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain; /* biar full keliatan, tidak terpotong */
-}
+    .service-img img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain; /* biar full keliatan, tidak terpotong */
+        transition: transform 0.3s ease;
+    }
 
-.whatsapp-float {
-    position: fixed;
-    bottom: 20px;   /* jarak dari bawah */
-    right: 20px;    /* jarak dari kanan */
-    z-index: 9999;  /* selalu di atas */
-    border-radius: 50%;
-}
+    /* Clickable Service Styles */
+    .clickable-service {
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-radius: 10px;
+        padding: 20px;
+        position: relative;
+        overflow: hidden;
+    }
 
+    .clickable-service:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
+    }
 
+    .clickable-service:hover .service-img img {
+        transform: scale(1.05);
+    }
+
+    .service-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0,0,0,0.7);
+        color: white;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        font-size: 18px;
+    }
+
+    .clickable-service:hover .service-overlay {
+        opacity: 1;
+    }
+
+    .clickable-service::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        transition: left 0.5s;
+    }
+
+    .clickable-service:hover::before {
+        left: 100%;
+    }
+
+    /* Additional hover effects for text */
+    .clickable-service h3 {
+        transition: all 0.3s ease;
+    }
+
+    .clickable-service:hover h3 {
+        transform: scale(1.05);
+    }
+
+    .whatsapp-float {
+        position: fixed;
+        bottom: 20px;   /* jarak dari bawah */
+        right: 20px;    /* jarak dari kanan */
+        z-index: 9999;  /* selalu di atas */
+        border-radius: 50%;
+    }
+
+    /* Mobile responsiveness for service items */
+    @media (max-width: 768px) {
+        .clickable-service {
+            margin-bottom: 15px;
+        }
+    }
     
 </style>
 
@@ -386,36 +458,48 @@ kami siap menjadi mitra terpercaya Anda. Kepuasan dan keamanan klien adalah prio
                     </div>
                 </div>
                 <div class="col-lg-7">
-                    <div class="row g-0">
+                    <div class="row g-3">
                         <div class="col-md-6 wow fadeIn" data-wow-delay="0.2s">
-                            <div class="service-item h-100 d-flex flex-column justify-content-center bg-primary">
-                                <a href="/megasentosa/penangkal-petir.html" class="service-img position-relative mb-4">
-                                    <img class="img-fluid w-100" src="img/service-1.jpg" alt="">
-                                    <h3>Penangkal Petir</h3>
-                                </a>
-                                <!-- <p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
-                                    stet diam sed stet lorem.</p> -->
-                            </div>
+                            <a href="./penangkal-petir.html" class="text-decoration-none">
+                                <div class="service-item h-100 d-flex flex-column justify-content-center bg-primary clickable-service shadow-sm">
+                                    <div class="service-img position-relative mb-4">
+                                        <img class="img-fluid w-100" src="img/service-1.jpg" alt="">
+                                        <div class="service-overlay">
+                                            <i class="fas fa-arrow-right"></i>
+                                        </div>
+                                    </div>
+                                    <h3 class="text-white text-center mb-3">Penangkal Petir</h3>
+                                    <p class="text-white-50 text-center mb-0">Klik untuk melihat detail layanan</p>
+                                </div>
+                            </a>
                         </div>
                         <div class="col-md-6 wow fadeIn" data-wow-delay="0.4s">
-                            <div class="service-item h-100 d-flex flex-column justify-content-center bg-light">
-                                <a href="/megasentosa/membran.html" class="service-img position-relative mb-4">
-                                    <img class="img-fluid w-100" src="img/service-2.jpg" alt="">
-                                    <h3>Membran</h3>
-                                </a>
-                                <!-- <p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
-                                    stet diam sed stet lorem.</p> -->
-                            </div>
+                            <a href="./membran.html" class="text-decoration-none">
+                                <div class="service-item h-100 d-flex flex-column justify-content-center bg-light clickable-service shadow-sm">
+                                    <div class="service-img position-relative mb-4">
+                                        <img class="img-fluid w-100" src="img/service-2.jpg" alt="">
+                                        <div class="service-overlay">
+                                            <i class="fas fa-arrow-right"></i>
+                                        </div>
+                                    </div>
+                                    <h3 class="text-primary text-center mb-3">Membran</h3>
+                                    <p class="text-muted text-center mb-0">Klik untuk melihat detail layanan</p>
+                                </div>
+                            </a>
                         </div>
                         <div class="col-md-6 wow fadeIn" data-wow-delay="0.6s">
-                            <div class="service-item h-100 d-flex flex-column justify-content-center bg-light">
-                                <a href="/megasentosa/panel.html" class="service-img position-relative mb-4">
-                                    <img class="img-fluid w-100" src="img/service-3.jpg" alt="">
-                                    <h3>Panel</h3>
-                                </a>
-                                <!-- <p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
-                                    stet diam sed stet lorem.</p> -->
-                            </div>
+                            <a href="./panel.html" class="text-decoration-none">
+                                <div class="service-item h-100 d-flex flex-column justify-content-center bg-light clickable-service shadow-sm">
+                                    <div class="service-img position-relative mb-4">
+                                        <img class="img-fluid w-100" src="img/service-3.jpg" alt="">
+                                        <div class="service-overlay">
+                                            <i class="fas fa-arrow-right"></i>
+                                        </div>
+                                    </div>
+                                    <h3 class="text-primary text-center mb-3">Panel</h3>
+                                    <p class="text-muted text-center mb-0">Klik untuk melihat detail layanan</p>
+                                </div>
+                            </a>
                         </div>
                  
                     </div>
